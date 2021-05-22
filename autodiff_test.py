@@ -1,6 +1,18 @@
 import autodiff as ad
 import numpy as np
 
+def test_forward_add():
+    x1 = ad.Variable(name="x1")
+    x2 = ad.Variable(name="x2")
+    x3 = x1 + x2
+    y = x3 * x3
+
+    executor = ad.Executor([y])
+    x1_val = 233 * np.ones(3)
+    x2_val = 3 * np.ones(3)
+    y_val = executor.run(feed_dict={x1: x1_val, x2: x2_val})
+    # assert np.array_equal((233 + 3) * (233 * 3) * np.ones(3), y_val[0])
+
 def test_identity():
     x2 = ad.Variable(name = "x2")
     y = x2
